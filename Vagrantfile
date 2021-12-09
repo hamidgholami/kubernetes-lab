@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-    NM = 3
+    NM = 1
 	(1..NM).each do |machine_id|
 		config.vm.define "master-11.#{20+machine_id}" do |machine|
 			machine.ssh.insert_key = false
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
 		end
 	end
 
-    NW = 3
+    NW = 0
 	(1..NW).each do |machine_id|
 		config.vm.define "worker-11.#{30+machine_id}" do |machine|
 			machine.ssh.insert_key = false
