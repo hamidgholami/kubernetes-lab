@@ -20,12 +20,17 @@ Vagrant.configure("2") do |config|
 				v.memory = 2048
 				v.cpus = 2
 				#v.storage_pool_name = 'pool_myhome_SSD'
-
 		    end
+			# Synced Directories
+			config.vm.synced_folder '.', '/vagrant', type: 'rsync', disabled: true
+			config.vm.synced_folder '.', '/vagrant', disabled: true
+			config.vm.synced_folder './provision', '/vagrant/provision', type: 'rsync'
+			# Provision
+			config.vm.provision 'shell', path: "./provision/bootstrap.sh"
 		end
 	end
 
-    NW = 0
+    NW = 1
 	(1..NW).each do |machine_id|
 		config.vm.define "worker-11.#{30+machine_id}" do |machine|
 			machine.ssh.insert_key = false
@@ -43,8 +48,13 @@ Vagrant.configure("2") do |config|
 				v.memory = 2048
 				v.cpus = 2
 				#v.storage_pool_name = 'pool_myhome_SSD'
-
 		    end
+			# Synced Directories
+			config.vm.synced_folder '.', '/vagrant', type: 'rsync', disabled: true
+			config.vm.synced_folder '.', '/vagrant', disabled: true
+			config.vm.synced_folder './provision', '/vagrant/provision', type: 'rsync'
+			# Provision
+			config.vm.provision 'shell', path: "./provision/bootstrap.sh"
 		end
 	end
 end
